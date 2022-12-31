@@ -133,10 +133,10 @@ int B_PLUS_TREE_INTERNAL_PAGE_TYPE::InsertNodeAfter(const ValueType &old_value, 
 INDEX_TEMPLATE_ARGUMENTS
 void B_PLUS_TREE_INTERNAL_PAGE_TYPE::MoveHalfTo(BPlusTreeInternalPage *recipient,
                                                 BufferPoolManager *buffer_pool_manager) {
-  auto start_idx = GetMinSize();
+  auto start_idx = GetMinSize()+1;
   SetSize(start_idx);
 
-  recipient->CopyNFrom(array + start_idx, GetMaxSize() - start_idx, buffer_pool_manager);
+  recipient->CopyNFrom(array + start_idx, GetMaxSize() - GetMinSize(), buffer_pool_manager);
 }
 
 /* Copy entries into me, starting from {items} and copy {size} entries.

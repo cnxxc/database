@@ -236,7 +236,7 @@ void BPLUSTREE_TYPE::InsertIntoParent(BPlusTreePage *old_node, const KeyType &ke
   auto new_size = parent_node->InsertNodeAfter(old_node->GetPageId(), key, new_node->GetPageId());
 
   // parent node is not full
-  if (new_size < internal_max_size_) {
+  if (new_size <= internal_max_size_) {
     ClearTransactionPageSet(transaction);
     buffer_pool_manager_->UnpinPage(parent_page->GetPageId(), true);
     return;

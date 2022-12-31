@@ -115,7 +115,7 @@ int B_PLUS_TREE_LEAF_PAGE_TYPE::Insert(const KeyType &key, const ValueType &valu
 INDEX_TEMPLATE_ARGUMENTS
 void B_PLUS_TREE_LEAF_PAGE_TYPE::MoveHalfTo(BPlusTreeLeafPage *recipient) {
   auto start_idx = GetMinSize();
-  auto moved_size = GetMaxSize() - start_idx;
+  auto moved_size = GetMaxSize() - start_idx+1;
   recipient->CopyNFrom(array + start_idx, moved_size);
   IncreaseSize(-1 * moved_size);
 }
